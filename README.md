@@ -1,3 +1,11 @@
+
+run
+npm install -g json-server
+https://github.com/typicode/json-server
+
+Start JSON Server
+json-server --watch db.json
+
 # AngularCrud
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
