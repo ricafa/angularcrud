@@ -38,14 +38,14 @@ export class CursosFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.curso.nome = null;
+    this.form = this.fb.group({
+      id: [null],
+      nome: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
+    });
     if(+this.route.snapshot.paramMap.get('id') >0){
       this.cs.find(+this.route.snapshot.paramMap.get('id'))
-             .subscribe(dt => this.curso = dt);
+             .subscribe(dt => this.form.setValue(dt));
     }
-    this.form = this.fb.group({
-      nome: [this.curso.nome, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
-    });
   }
 
 }
