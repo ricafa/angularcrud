@@ -1,6 +1,10 @@
+import { browser } from 'protractor';
+import { HttpClientModule } from '@angular/common/http';
 import { CursosService } from './../../shared/cursos.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Curso } from 'src/model/curso';
 
 @Component({
   selector: 'app-cursos-form',
@@ -10,7 +14,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CursosFormComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
-  constructor(private fb: FormBuilder, private cs: CursosService) { }
+  curso: Curso = [];
+  constructor(private fb: FormBuilder, 
+              private cs: CursosService,
+              private route: ActivatedRoute) {}
 
   onSubmit(){
     this.submitted = true;
@@ -28,12 +35,16 @@ export class CursosFormComponent implements OnInit {
   onCancel(){
     this.submitted = false;
     this.form.reset;
-    console.log('onCancel');
   }
 
   ngOnInit() {
+    this.curso.nome = null;
+    if(+this.route.snapshot.paramMap.get('id') >0){
+      this.cs.find(+this.route.snapshot.paramMap.get('id'))
+             .subscribe(dt => this.curso = dt);
+    }
     this.form = this.fb.group({
-      nome: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
+      nome: [this.curso.nome, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
     });
   }
 

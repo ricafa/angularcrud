@@ -4,10 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { CursosListaComponent } from './cursos/cursos-lista/cursos-lista.component';
 import { CursosFormComponent } from './cursos/cursos-form/cursos-form.component';
-
 
 @NgModule({
   declarations: [

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Curso } from './../../model/curso';
+import { compileDirectiveFromMetadata } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,15 @@ export class CursosService {
   create(curso){
     return this.http.post(this.API, curso).pipe();
   }
+
+  edit(curso){
+    return this.http.put(this.API, curso).pipe();
+  }
+
+  find(id){
+    console.log(this.API+'/'+id);
+    return this.http.get<Curso>(this.API+'/'+id);
+  }
+  
 
 }
