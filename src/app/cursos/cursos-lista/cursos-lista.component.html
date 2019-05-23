@@ -3,5 +3,9 @@
 <table>
 <tr *ngFor="let curso of cursos">
   <td>{{curso.id }} - {{curso.nome}}</td>
+ 
 </tr>
 </table>
+
+
+<button type="button" [routerLink]="['novo']" >Novo</button>

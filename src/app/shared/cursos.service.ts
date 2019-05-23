@@ -6,11 +6,16 @@ import { Curso } from './../../model/curso';
   providedIn: 'root'
 })
 export class CursosService {
+  API = 'http://localhost:3000/cursos';
 
   constructor(private http : HttpClient) {}
 
   getCursos(){
-    return this.http.get<Curso[]>('http://localhost:3000/cursos');
+    return this.http.get<Curso[]>(this.API);
+  }
+
+  create(curso){
+    return this.http.post(this.API, curso).pipe();
   }
 
 }
